@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { env } from '../../../env/env';
 import { AttackRequest, Hero, HeroRequest, MessageResponse } from '../../models/hero';
+import { env } from '../../../env/env';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +16,30 @@ export class HeroService {
     return this.http.post<Hero>(this.apiUrl, hero);
   }
 
-  getHeroes(filters?: { name?: string; attackPower?: number; defensePower?: number }): Observable<Hero[]> {
+  getHeroes(filters?: { name?: string; attackPower?: number | null; defensePower?: number | null }): Observable<Hero[]> {
     let params = new HttpParams();
-    if (filters?.name) params = params.set('name', filters.name);
-    if (filters?.attackPower) params = params.set('attackPower', filters.attackPower.toString());
-    if (filters?.defensePower) params = params.set('defensePower', filters.defensePower.toString());
+
+    if (filters?.name && filters.name.trim() !== '') {
+      params = params.set('name', filters.name);
+    }
+
+    if (filters?.attackPower !== null && filters?.attackPower !== undefined && filters.attackPower > 0) {
+      params = params.set('attackPower', filters.attackPower.toString());
+    }
+
+    if (filters?.defensePower !== null && filters?.defensePower !== undefined && filters.defensePower > 0) {
+      params = params.set('defensePower', filters.defensePower.toString());
+    }
 
     return this.http.get<Hero[]>(this.apiUrl, { params });
   }
 
-  attackHero(id: string, attack: AttackRequest): Observable<MessageResponse> {
-    return this.http.put<MessageResponse>(`${this.apiUrl}/${id}/attack`, attack);
+  getHeroById(id: string): Observable<Hero> {
+    return this.http.get<Hero>(`${this.apiUrl}/${id}`);
+  }
+
+  attackHero(id: string, attackValue: number): Observable<MessageResponse> {
+    const attackRequest: AttackRequest = { attackValue };
+    return this.http.put<MessageResponse>(`${this.apiUrl}/${id}/attack`, attackRequest);
   }
 }
