@@ -1,4 +1,3 @@
 export const env = {
-  production: true,
-  apiUrl: 'http://localhost:8080/api'
+  apiUrl: (window as any).__env?.API_URL
 };
