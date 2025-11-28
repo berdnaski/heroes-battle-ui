@@ -17,11 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "fileReplacements": [
-              {
-                "replace": "src/environments/environment.ts"
-              }
-            ],
             "outputPath": "dist/heroes-battle-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -38,6 +33,7 @@
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.css",
               "node_modules/primeicons/primeicons.css",
+              "node_modules/primeflex/primeflex.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -56,7 +52,13 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/env/env.ts",
+                  "with": "src/env/env.production.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
@@ -64,7 +66,7 @@
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
