@@ -1,27 +1,126 @@
-# HeroesBattleUi
+# Heroes Battle UI 🦸‍♂️⚔️
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+Frontend em Angular para o sistema de batalha de heróis, integrado à Heroes Battle API.
 
-## Development server
+## 🚀 Tecnologias
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular 18
+- TypeScript
+- PrimeNG e PrimeIcons
+- SCSS (layout próprio com CSS Grid)
+- RxJS
+- Node.js 20+
 
-## Code scaffolding
+## 📋 Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- ✅ Lista de Heróis com filtros (nome, ataque, defesa)
+- ✅ Cadastro de novo herói
+- ✅ Batalha com previsão de dano e vida, usando toast para feedback
+- ✅ Layout responsivo e organizado com SCSS próprio
+- ✅ Integração com API (GET/POST/PUT)
 
-## Build
+## 🏗️ Estrutura do Projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+src/app/
+├── app.component.*            # Shell e layout
+├── app.routes.ts              # Rotas principais
+├── core/
+│   └── services/hero.service.ts
+├── features/
+│   ├── heroes/
+│   │   ├── hero-list/         # Lista e filtros
+│   │   └── hero-create/       # Form de criação
+│   └── battle/                # Tela de batalha
+└── models/hero.ts             # Tipos e contratos
+```
 
-## Running unit tests
+## 🔌 Integração com a API
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+A UI espera a API em `http://localhost:8080`. Endpoints utilizados:
 
-## Running end-to-end tests
+- `POST /api/heroes` – criar herói
+- `GET /api/heroes` – listar com filtros
+- `GET /api/heroes/{id}` – obter herói por id
+- `PUT /api/heroes/{id}/attack` – atacar herói
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## ⚙️ Configuração e Execução
 
-## Further help
+Pré-requisitos:
+- Node.js 20+
+- Backend rodando em `http://localhost:8080`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Instalação:
+```bat
+cd c:\Users\Erick\Documents\battle-challenge\heroes-battle-ui
+npm install
+```
+
+Executar em desenvolvimento:
+```bat
+npm start
+```
+
+Build de produção:
+```bat
+npm run build
+```
+
+## 🌍 Ambiente
+
+Arquivo opcional para apontar URLs e flags:
+```
+src\env\env.production.ts
+```
+
+Exemplo:
+```ts
+export const environment = {
+  production: true,
+  apiUrl: 'http://localhost:8080'
+};
+```
+
+## 🧭 Páginas
+
+- Lista de Heróis
+  - Filtros no card “Filtros”
+  - Botão “Novo Herói”
+  - Ação “Atacar” leva à batalha
+
+- Criar Herói
+  - Formulário com validação (nome, ataque, defesa, vida)
+  - Botões “Cancelar” e “Cadastrar”
+
+- Batalha
+  - Mostra vida atual e barra de progresso
+  - Campo “Valor do ataque” com previsão de dano e vida
+  - Feedback por `p-toast`
+
+## 🧪 Teste Manual
+
+1. Suba a API (porta 8080)
+2. Rode `npm start` para servir a UI (porta 4200)
+3. Acesse `http://localhost:4200`
+4. Cadastre um herói e teste filtros e ataque
+
+## 📝 Commits Semânticos
+
+Padrão recomendável (curtos, em inglês):
+```
+feat: add feature
+fix: bug fix
+refactor: code refactor
+chore: tooling/config
+docs: documentation
+```
+
+## 📦 Scripts
+
+- `npm start` – serve dev
+- `npm run build` – build prod
+- `npm run lint` – lint do projeto (se configurado)
+
+---
+
+**Desenvolvido com ☕ e ❤️ - Erick Berdnaski**
