@@ -1,0 +1,48 @@
+<p-toast></p-toast>
+
+<div class="page">
+  <p-toolbar>
+    <div class="p-toolbar-group-left">
+      <button pButton icon="pi pi-arrow-left" label="Voltar" class="p-button-text" (click)="navigateToHeroList()"></button>
+    </div>
+    <div class="p-toolbar-group-right">
+      <span class="title">Batalha</span>
+    </div>
+  </p-toolbar>
+
+  <div *ngIf="loading" class="center mt-4">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+
+  <p-card *ngIf="hero" [header]="hero.name" [subheader]="'ID: ' + hero.id" styleClass="shadow-2 mb-3">
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <span class="font-bold mr-2">Vida</span>
+          <p-tag [value]="hero.health.toString()" [severity]="getHealthSeverity(hero.health)"></p-tag>
+        </div>
+        <p-progressBar [value]="hero.health" styleClass="health-progress"></p-progressBar>
+      </div>
+      <div class="col">
+        <div class="attack-block">
+          <label class="font-bold mb-2 block">Valor do ataque</label>
+          <p-inputNumber [(ngModel)]="attackValue" [min]="0" [showButtons]="true" mode="decimal" placeholder="Informe o ataque"></p-inputNumber>
+          <div class="grid mt-3" *ngIf="attackValue > 0">
+            <div class="col-6">
+              <p-tag [value]="'Dano: ' + calculatePredictedDamage()" severity="info"></p-tag>
+            </div>
+            <div class="col-6">
+              <p-tag [value]="'Vida: ' + calculatePredictedHealth()" severity="success"></p-tag>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="actions mt-3">
+        <button pButton label="Atacar" icon="pi pi-bolt" class="p-button-danger" (click)="attack()" [disabled]="attacking || attackValue <= 0"></button>
+        <button pButton label="Voltar" class="p-button-secondary" (click)="navigateToHeroList()"></button>
+      </div>
+    </div>
+  </p-card>
+
+  <div *ngIf="!loading && !hero" class="text-center text-red-400 mt-5">Herói não encontrado.</div>
+</div>

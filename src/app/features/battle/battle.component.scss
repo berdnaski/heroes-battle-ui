@@ -1,0 +1,16 @@
+:host { display: block; width: 100%; }
+.page { max-width: 900px; margin: 0 auto; padding: 1rem; }
+.title { color: #6b7280; font-weight: 600; }
+.center { display: flex; justify-content: center; }
+.battle-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.panel { }
+.mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.mini-panel { }
+.actions { display: flex; gap: .75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-3 { margin-top: .75rem; }
+.mr-2 { margin-right: .5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.health-progress { margin-top: .75rem; margin-bottom: 1.75rem; }
+.attack-block { margin-top: 1rem; }
+@media (min-width: 768px) { .battle-grid { grid-template-columns: 1fr 1fr; } }
