@@ -1,0 +1,103 @@
+<div class="page">
+  <p-toast />
+
+  <div class="header">
+    <h1>Cadastrar Novo Herói</h1>
+    <p-button
+      label="Voltar"
+      icon="pi pi-arrow-left"
+      severity="secondary"
+      (onClick)="cancel()"
+    />
+  </div>
+
+  <p-card styleClass="create-card">
+    <form (ngSubmit)="createHero()" class="form-grid">
+      <div class="col-12 field">
+        <label for="name" class="block text-sm font-medium mb-2">Nome *</label>
+        <input
+          id="name"
+          type="text"
+          pInputText
+          [(ngModel)]="hero.name"
+          name="name"
+          placeholder="Digite o nome do herói"
+          [required]="true"
+          class="full-width"
+        />
+        <small *ngIf="!hero.name.trim()" class="text-red-500 block mt-1">
+          Nome é obrigatório
+        </small>
+      </div>
+
+      <div class="col-12 md:col-6 field">
+        <label for="attackPower" class="block text-sm font-medium mb-2">Poder de Ataque *</label>
+        <p-inputNumber
+          id="attackPower"
+          [(ngModel)]="hero.attackPower"
+          name="attackPower"
+          [min]="1"
+          [max]="1000"
+          mode="decimal"
+          placeholder="Ex: 80"
+          [showButtons]="true"
+          [inputStyleClass]="'full-width'"
+        />
+        <small *ngIf="hero.attackPower <= 0" class="text-red-500 block mt-1">
+          Poder de ataque deve ser maior que zero
+        </small>
+      </div>
+
+      <div class="col-12 md:col-6 field">
+        <label for="defensePower" class="block text-sm font-medium mb-2">Poder de Defesa *</label>
+        <p-inputNumber
+          id="defensePower"
+          [(ngModel)]="hero.defensePower"
+          name="defensePower"
+          [min]="1"
+          [max]="1000"
+          mode="decimal"
+          placeholder="Ex: 60"
+          [showButtons]="true"
+          [inputStyleClass]="'w-full'"
+        />
+        <small *ngIf="hero.defensePower <= 0" class="text-red-500 block mt-1">
+          Poder de defesa deve ser maior que zero
+        </small>
+      </div>
+
+      <div class="col-12 field">
+        <label for="health" class="block text-sm font-medium mb-2">Vida *</label>
+        <p-inputNumber
+          id="health"
+          [(ngModel)]="hero.health"
+          name="health"
+          [min]="1"
+          [max]="10000"
+          mode="decimal"
+          placeholder="Ex: 100"
+          [showButtons]="true"
+          [inputStyleClass]="'w-full'"
+        />
+        <small *ngIf="hero.health <= 0" class="text-red-500 block mt-1">
+          Vida deve ser maior que zero
+        </small>
+      </div>
+
+      <div class="form-actions"><div class="actions-buttons">
+        <p-button
+          label="Cancelar"
+          severity="secondary"
+          (onClick)="cancel()"
+        />
+        <p-button
+          label="Cadastrar"
+          type="submit"
+          [loading]="loading"
+          icon="pi pi-check"
+          [disabled]="!hero.name.trim() || hero.attackPower <= 0 || hero.defensePower <= 0 || hero.health <= 0"
+        />
+      </div></div>
+    </form>
+  </p-card>
+</div>
