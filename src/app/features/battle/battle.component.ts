@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-// PrimeNG
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -88,7 +87,7 @@ export class BattleComponent implements OnInit {
         this.battleResult = result;
         this.attacking = false;
 
-        this.loadHero(); // recarrega hero atualizado
+        this.loadHero(); 
         this.showInfoMessage(result.message);
       },
       error: (err) => {
