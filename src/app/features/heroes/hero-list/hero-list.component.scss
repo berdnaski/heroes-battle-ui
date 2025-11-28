@@ -1,0 +1,13 @@
+:host { display: block; width: 100%; }
+.page { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.filters-card { padding: 1rem; border-radius: .75rem; }
+.filters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.full-width { width: 100%; }
+.actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; }
+.actions-buttons { display: flex; gap: .75rem; }
+.p-datatable { margin-top: 1rem; }
+.text-red-500 { color: #ef4444; }
+.text-green-600 { color: #16a34a; }
+.font-bold { font-weight: bold; }
+.text-color-secondary { color: #6b7280; }

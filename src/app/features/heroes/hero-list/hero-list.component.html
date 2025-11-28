@@ -1,0 +1,118 @@
+<div class="page">
+  <div class="header">
+    <h1>Lista de Heróis</h1>
+    <p-button
+      label="Novo Herói"
+      icon="pi pi-plus"
+      routerLink="/heroes/create"
+    />
+  </div>
+
+  <p-card header="Filtros" styleClass="filters-card">
+    <div class="filters-grid">
+      <div class="col-12 md:col-4">
+        <label for="name" class="block text-sm font-medium mb-2">Nome</label>
+        <input
+          id="name"
+          type="text"
+          pInputText
+          [(ngModel)]="filters.name"
+          placeholder="Buscar por nome..."
+          (keyup.enter)="search()"
+          class="full-width"
+        />
+      </div>
+
+      <div class="col-12 md:col-3">
+        <label for="attack" class="block text-sm font-medium mb-2">Poder de Ataque</label>
+        <input
+          id="attack"
+          type="number"
+          pInputText
+          [(ngModel)]="filters.attackPower"
+          placeholder="Filtrar por ataque..."
+          class="full-width"
+        />
+      </div>
+
+      <div class="col-12 md:col-3">
+        <label for="defense" class="block text-sm font-medium mb-2">Poder de Defesa</label>
+        <input
+          id="defense"
+          type="number"
+          pInputText
+          [(ngModel)]="filters.defensePower"
+          placeholder="Filtrar por defesa..."
+          class="full-width"
+        />
+      </div>
+
+      <div class="actions">
+        <div class="actions-buttons">
+          <p-button
+            label="Buscar"
+            icon="pi pi-search"
+            (onClick)="search()"
+          />
+          <p-button
+            label="Limpar"
+            severity="secondary"
+            icon="pi pi-refresh"
+            (onClick)="clearFilters()"
+          />
+        </div>
+      </div>
+    </div>
+  </p-card>
+
+  <p-table
+    [value]="heroes"
+    [loading]="loading"
+    [paginator]="true"
+    [rows]="10"
+    styleClass="p-datatable-striped"
+    [tableStyle]="{'min-width': '60rem'}"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nome</th>
+        <th>Ataque</th>
+        <th>Defesa</th>
+        <th>Vida</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-hero>
+      <tr>
+        <td>{{ hero.name }}</td>
+        <td>{{ hero.attackPower }}</td>
+        <td>{{ hero.defensePower }}</td>
+        <td>
+          <span
+            [class]="hero.health <= 30 ? 'text-red-500 font-bold' : 'text-green-600'"
+          >
+            {{ hero.health }}
+          </span>
+        </td>
+        <td>
+          <p-button
+            label="Atacar"
+            icon="pi pi-bolt"
+            severity="warning"
+            [routerLink]="['/battle', hero.id]"
+          />
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5" class="text-center p-4 text-color-secondary">
+          <i class="pi pi-search mr-2"></i>
+          Nenhum herói encontrado
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
